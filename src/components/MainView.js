@@ -15,6 +15,7 @@ class InnerMainView extends Component {
   static propTypes = {
     userData: PropTypes.object
   }
+
   render() {
     const dataArr = map(identity, this.props.userData)
     return (
