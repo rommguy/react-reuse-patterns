@@ -1,25 +1,38 @@
 import './WithBorder.css'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {withState} from 'recompose'
+import {getRandomColorStyleValue} from '../utils'
 
-class WithBorderInner extends Component {
+export class WithBorder extends Component {
   static propTypes = {
-    color: PropTypes.string,
-    mouseOver: PropTypes.bool.isRequired,
-    updateMouseState: PropTypes.func.isRequired
+    color: PropTypes.string
+  }
+
+  constructor() {
+    super()
+
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseLeave = this.onMouseLeave.bind(this)
+    this.state = {borderColor: null}
+  }
+
+  onMouseEnter() {
+    this.setState({borderColor: getRandomColorStyleValue()})
+  }
+
+  onMouseLeave() {
+    this.setState({borderColor: null})
   }
 
   render() {
+    const borderColor = this.state.borderColor || this.props.color
     return (
-      <div className={`with-border ${this.props.mouseOver ? 'mouse-over' : ''}`}
-           style={{borderColor: this.props.color}}
-           onMouseEnter={() => this.props.updateMouseState(true)}
-           onMouseLeave={() => this.props.updateMouseState(false)}>
+      <div className={`with-border ${this.state.borderColor ? 'mouse-over' : ''}`}
+           style={{borderColor}}
+           onMouseEnter={this.onMouseEnter}
+           onMouseLeave={this.onMouseLeave}>
         {this.props.children}
       </div>
     )
   }
 }
-
-export const WithBorder = withState('mouseOver', 'updateMouseState', false)(WithBorderInner)
