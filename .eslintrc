@@ -6,6 +6,7 @@
         "children"
       ]
     }],
+    "react/sort-comp": 2,
     "react/no-unused-prop-types": 2,
     "prefer-template" : 2,
     "arrow-body-style": [2, "as-needed"],

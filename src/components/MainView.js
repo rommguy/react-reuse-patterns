@@ -33,9 +33,6 @@ class InnerMainView extends Component {
       </div>
     )
   }
-  componentWillUpdate() {
-    console.log('hi')
-  }
 }
 
 

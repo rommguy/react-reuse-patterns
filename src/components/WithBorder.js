@@ -3,6 +3,10 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 export class WithBorder extends Component {
+  static propTypes = {
+    color: PropTypes.string
+  }
+
   constructor() {
     super()
 
@@ -29,8 +33,4 @@ export class WithBorder extends Component {
       </div>
     )
   }
-}
-
-WithBorder.propTypes = {
-  color: PropTypes.string
 }
