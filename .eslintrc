@@ -1,0 +1,25 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "react/prop-types": [2, {
+      "ignore": [
+        "children"
+      ]
+    }],
+    "react/no-unused-prop-types": 2,
+    "prefer-template" : 2,
+    "arrow-body-style": [2, "as-needed"],
+    "arrow-spacing": [2, { "before": true, "after": true }],
+    "arrow-parens": [2, "as-needed"],
+    "no-duplicate-imports": 2,
+    "no-var": 2,
+    "prefer-const": 2,
+    "prefer-arrow-callback": [1, {
+      "allowNamedFunctions": false,
+      "allowUnboundThis": true
+    }],
+    "prefer-rest-params": 2,
+    "prefer-spread": 2,
+    "rest-spread-spacing": [2, "never"]
+  }
+}

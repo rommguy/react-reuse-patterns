@@ -1,0 +1,9 @@
+.with-border {
+    padding: 10px;
+    transition: padding 250ms linear;
+    border: 5px solid darkgoldenrod;
+}
+
+.with-border.mouse-over {
+    padding: 50px;
+}
