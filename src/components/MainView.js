@@ -7,6 +7,8 @@ import {WithBorder} from './WithBorder'
 import {WithBorderHOC} from './WithBorderHOC'
 import {map, identity} from 'lodash/fp'
 import {columns} from '../constants/columns'
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
 
 
 const TableWithBorder = WithBorderHOC(ReactTable) // created statically
@@ -16,20 +18,29 @@ class InnerMainView extends Component {
     userData: PropTypes.object
   }
 
+  constructor(){
+    super()
+
+    this.state = {
+      tags: ['Too', 'Many', 'People']
+    }
+
+    this.updateTags = tags => {
+      this.setState({tags})
+    }
+  }
+
   render() {
     const dataArr = map(identity, this.props.userData)
     return (
       <div className="main-view">
         <WithBorder color={'#ffff00'}>
-          {dataArr.length ? (<ReactTable
+          <ReactTable
             data={dataArr}
             columns={columns}
-            defaultPageSize={10}/>) : null}
+            defaultPageSize={5}/>
         </WithBorder>
-        <TableWithBorder data={dataArr}
-                             columns={columns}
-                             defaultPageSize={10}
-                             color={'red'}/>
+        <TagsInput value={this.state.tags} onChange={this.updateTags}/>
       </div>
     )
   }
