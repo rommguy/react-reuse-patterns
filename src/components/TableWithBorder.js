@@ -1,9 +1,14 @@
+import './MainView.css'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import ReactTable from 'react-table';
 import {getRandomColorStyleValue} from '../utils'
 
-export class WithBorder extends Component {
+export class TableWithBorder extends Component {
   static propTypes = {
+    columns: PropTypes.object,
+    data: PropTypes.object,
+    defaultPageSize: PropTypes.number,
     color: PropTypes.string
   }
 
@@ -25,12 +30,15 @@ export class WithBorder extends Component {
 
   render() {
     const borderColor = this.state.borderColor || this.props.color
+    const {defaultPageSize, data, columns} = this.props
     return (
       <div className={`with-border ${this.state.borderColor ? 'mouse-over' : ''}`}
            style={{borderColor}}
            onMouseEnter={this.onMouseEnter}
            onMouseLeave={this.onMouseLeave}>
-        {this.props.children}
+        <ReactTable data={data}
+                    columns={columns}
+                    defaultPageSize={defaultPageSize}/>
       </div>
     )
   }
