@@ -24,10 +24,10 @@ class InnerMainView extends Component {
     this.state = {
       tags: ['Too', 'Many', 'People']
     }
+  }
 
-    this.updateTags = tags => {
-      this.setState({tags})
-    }
+  updateTags = tags => {
+    this.setState({tags})
   }
 
   render() {
