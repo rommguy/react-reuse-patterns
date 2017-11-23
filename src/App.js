@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import {MainView} from './components/MainView'
 import 'react-table/react-table.css'
-import './components/WithBorder.css'
 
 class App extends Component {
   render() {

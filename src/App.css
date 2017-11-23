@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.main-view {
+  margin: 50px;
+}
+
+.with-border {
+  padding: 10px;
+  transition: padding 250ms linear;
+  border: 5px solid darkgoldenrod;
+}
+
+.with-border.mouse-over {
+  padding: 50px;
+}
+
+.tags-container {
+  display: inline-block;
+  width: 400px;
+  margin: 20px;
+}
+
+.table-container {
+  display: inline-block;
+  width: 500px;
+}

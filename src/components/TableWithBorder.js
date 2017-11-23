@@ -1,4 +1,3 @@
-import './MainView.css'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import ReactTable from 'react-table';

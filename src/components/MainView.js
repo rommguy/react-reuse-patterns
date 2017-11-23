@@ -1,4 +1,3 @@
-import './MainView.css'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
@@ -35,12 +34,18 @@ class InnerMainView extends Component {
     const dataArr = map(identity, this.props.userData)
     return (
       <div className="main-view">
-        <TableWithBorder
-          color={'#ffff00'}
-          data={dataArr}
-          columns={columns}
-          defaultPageSize={5}/>
-        <TagsInput value={this.state.tags} onChange={this.updateTags}/>
+        <div className="table-container">
+          <TableWithBorder
+            color={'#ffff00'}
+            data={dataArr}
+            columns={columns}
+            defaultPageSize={5}/>
+        </div>
+        <div className="tags-container">
+          <WithBorder>
+              <TagsInput value={this.state.tags} onChange={this.updateTags}/>
+          </WithBorder>
+        </div>
       </div>
     )
   }

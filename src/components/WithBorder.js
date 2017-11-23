@@ -10,16 +10,14 @@ export class WithBorder extends Component {
   constructor() {
     super()
 
-    this.onMouseEnter = this.onMouseEnter.bind(this)
-    this.onMouseLeave = this.onMouseLeave.bind(this)
     this.state = {borderColor: null}
   }
 
-  onMouseEnter() {
+  onMouseEnter = () => {
     this.setState({borderColor: getRandomColorStyleValue()})
   }
 
-  onMouseLeave() {
+  onMouseLeave = () => {
     this.setState({borderColor: null})
   }
 
