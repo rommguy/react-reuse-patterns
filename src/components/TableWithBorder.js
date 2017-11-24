@@ -5,8 +5,8 @@ import {getRandomColorStyleValue} from '../utils'
 
 export class TableWithBorder extends Component {
   static propTypes = {
-    columns: PropTypes.object,
-    data: PropTypes.object,
+    columns: PropTypes.array,
+    data: PropTypes.array,
     defaultPageSize: PropTypes.number,
     color: PropTypes.string
   }
