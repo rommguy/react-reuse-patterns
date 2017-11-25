@@ -50,6 +50,12 @@ const StatelessWithBorder = props => {
   )
 }
 
+StatelessWithBorder.propTypes = {
+  color: PropTypes.string,
+  colorInState: PropTypes.string,
+  updateBorderColor: PropTypes.func
+}
+
 const WithBorder = withState('colorInState', 'updateBorderColor', null)(StatelessWithBorder)
 
 
