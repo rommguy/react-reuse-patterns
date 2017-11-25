@@ -6,11 +6,8 @@ import {columns} from '../constants/columns'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 
-export class MainView extends Component {
+class WithBorder extends Component {
   static propTypes = {
-    userData: PropTypes.array,
-    tags: PropTypes.array.isRequired,
-    updateTags: PropTypes.func.isRequired,
     color: PropTypes.string
   }
 
@@ -20,10 +17,6 @@ export class MainView extends Component {
     this.state = {
       borderColor: null
     }
-  }
-
-  updateTags = newTags => {
-    this.props.updateTags(newTags)
   }
 
   onMouseEnter = () => {
@@ -38,20 +31,43 @@ export class MainView extends Component {
     const borderColor = this.state.borderColor || this.props.color
 
     return (
+      <div className="with-border"
+           style={{borderColor}}
+           onMouseEnter={this.onMouseEnter}
+           onMouseLeave={this.onMouseLeave}>
+        {this.props.children}
+      </div>
+    )
+  }
+}
+
+export class MainView extends Component {
+  static propTypes = {
+    userData: PropTypes.array,
+    tags: PropTypes.array.isRequired,
+    updateTags: PropTypes.func.isRequired,
+    color: PropTypes.string
+  }
+
+  updateTags = newTags => {
+    this.props.updateTags(newTags)
+  }
+
+  render() {
+    return (
       <div className="main-view">
         <div className="table-container">
-          <div className="with-border"
-               style={{borderColor}}
-               onMouseEnter={this.onMouseEnter}
-               onMouseLeave={this.onMouseLeave}>
+          <WithBorder color={this.props.color}>
             <ReactTable
               data={this.props.userData}
               columns={columns}
               defaultPageSize={5}/>
-          </div>
+          </WithBorder>
         </div>
         <div className="tags-container">
-              <TagsInput value={this.props.tags} onChange={this.updateTags}/>
+          <WithBorder color={this.props.color}>
+            <TagsInput value={this.props.tags} onChange={this.updateTags}/>
+          </WithBorder>
         </div>
       </div>
     )
