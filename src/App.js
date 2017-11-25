@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 // import {MainView} from './part1-no-reuse/MainView'
-import {MainView} from './part2-simple-composition/MainView'
+import {MainView} from './part3-simple-export/MainView'
 import {withState} from 'recompose'
 import 'react-table/react-table.css'
 import {map, identity} from 'lodash/fp'
+import {columns} from './constants/columns'
 
 const usersData = {
   '0001': {firstName: 'comfort', lastName: 'account', age: 27, status: 'relationshipnail', visits: 59},
@@ -28,7 +29,8 @@ class App extends Component {
         </header>
         <StatefullMainView
           color="#80de7e"
-          userData={dataArr}/>
+          userData={dataArr}
+          columns={columns}/>
       </div>
     );
   }

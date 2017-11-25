@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import ReactTable from 'react-table';
 import {getRandomColorStyleValue} from '../utils'
-import {columns} from '../constants/columns'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 
@@ -11,7 +10,8 @@ export class MainView extends Component {
     userData: PropTypes.array,
     tags: PropTypes.array.isRequired,
     updateTags: PropTypes.func.isRequired,
-    color: PropTypes.string
+    color: PropTypes.string,
+    columns: PropTypes.array
   }
 
   constructor() {
@@ -46,7 +46,7 @@ export class MainView extends Component {
                onMouseLeave={this.onMouseLeave}>
             <ReactTable
               data={this.props.userData}
-              columns={columns}
+              columns={this.props.columns}
               defaultPageSize={5}/>
           </div>
         </div>

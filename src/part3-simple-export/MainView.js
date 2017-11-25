@@ -40,6 +40,29 @@ class WithBorder extends Component {
   }
 }
 
+const TableWithBorder = props => (
+  <WithBorder color={props.color}>
+    <ReactTable {...props}/>
+  </WithBorder>
+)
+
+TableWithBorder.propTypes = {
+  color: PropTypes.string,
+  userData: PropTypes.array,
+  columns: PropTypes.array,
+  defaultPageSize: PropTypes.number
+}
+
+const TagsWithBorder = props => (
+  <WithBorder color={props.color}>
+    <TagsInput {...props}/>
+  </WithBorder>
+)
+
+TagsWithBorder.propTypes = {
+  color: PropTypes.string
+}
+
 export class MainView extends Component {
   static propTypes = {
     userData: PropTypes.array,
@@ -54,20 +77,19 @@ export class MainView extends Component {
   }
 
   render() {
+    const {columns, color, userData} = this.props
     return (
       <div className="main-view">
         <div className="table-container">
-          <WithBorder color={this.props.color}>
-            <ReactTable
-              data={this.props.userData}
-              columns={this.props.columns}
-              defaultPageSize={5}/>
-          </WithBorder>
+          <TableWithBorder columns={columns}
+                           color={color}
+                           data={userData}
+                           defaultPageSize={5}/>
         </div>
         <div className="tags-container">
-          <WithBorder color={this.props.color}>
-            <TagsInput value={this.props.tags} onChange={this.updateTags}/>
-          </WithBorder>
+          <TagsWithBorder color={color}
+                          value={this.props.tags}
+                          onChange={this.updateTags}/>
         </div>
       </div>
     )
