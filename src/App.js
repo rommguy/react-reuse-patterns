@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 // import {MainView} from './part1-no-reuse/MainView'
-import {MainView} from './part3-simple-export/MainView'
+import {MainView} from './part4-hoc-export/MainView'
 import {withState} from 'recompose'
 import 'react-table/react-table.css'
 import {map, identity} from 'lodash/fp'
