@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {MainView} from './components/MainView'
+import {MainView} from './part1-no-reuse/MainView'
+import {withState} from 'recompose'
 import 'react-table/react-table.css'
+import {map, identity} from 'lodash/fp'
 
 const usersData = {
   '0001': {firstName: 'comfort', lastName: 'account', age: 27, status: 'relationshipnail', visits: 59},
@@ -12,15 +14,20 @@ const usersData = {
   '0005': {firstName: 'window', lastName: 'honey', age: 29, status: 'complicated', visits: 7},
 }
 
+const StatefullMainView = withState('tags', 'updateTags', ['Too', 'Many', 'People'])(MainView)
+
 class App extends Component {
   render() {
+    const dataArr = map(identity, usersData)
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo"/>
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <MainView usersData={usersData} />
+        <StatefullMainView
+          color="#80de7e"
+          userData={dataArr}/>
       </div>
     );
   }
