@@ -4,36 +4,24 @@ import ReactTable from 'react-table';
 import {getRandomColorStyleValue} from '../utils'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
-import {withState} from 'recompose'
 
-class WithBorder2 extends Component {
-  constructor() {
+const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComponent => class OuterComponent extends Component {
+  static propTypes = {}
+
+  constructor(props) {
     super()
 
-    this.state = {
-      borderColor: null
-    }
+    this.state = {myState: initialStateGetter(props)}
   }
 
-  onMouseEnter = () => {
-    this.setState({borderColor: getRandomColorStyleValue()})
-  }
-
-  onMouseLeave = () => {
-    this.setState({borderColor: null})
-  }
+  updateState = newVal => this.setState({myState: newVal})
 
   render() {
-    const borderColor = this.state.borderColor || this.props.color
-
-    return (
-      <div className="with-border"
-           style={{borderColor}}
-           onMouseEnter={this.onMouseEnter}
-           onMouseLeave={this.onMouseLeave}>
-        {this.props.children}
-      </div>
-    )
+    const innerProps = {
+      [stateName]: this.state.myState,
+      [stateUpdaterName]: this.updateState
+    }
+    return (<InnerComponent {...innerProps} {...this.props}/>)
   }
 }
 
@@ -70,7 +58,7 @@ const TagsWithBorder = WithBorderHOC(TagsInput)
 
 export class MainView extends Component {
   static propTypes = {
-    userData: PropTypes.array,
+    data: PropTypes.array,
     tags: PropTypes.array.isRequired,
     updateTags: PropTypes.func.isRequired,
     color: PropTypes.string,
@@ -82,13 +70,13 @@ export class MainView extends Component {
   }
 
   render() {
-    const {columns, color, userData} = this.props
+    const {columns, color, data} = this.props
     return (
       <div className="main-view">
         <div className="table-container">
           <TableWithBorder columns={columns}
                            color={color}
-                           data={userData}
+                           data={data}
                            defaultPageSize={5}/>
         </div>
         <div className="tags-container">

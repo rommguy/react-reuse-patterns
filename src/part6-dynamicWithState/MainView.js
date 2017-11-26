@@ -28,7 +28,6 @@ StatelessWithBorder.propTypes = {
 
 const WithBorder = withState('colorInState', 'updateBorderColor', null)(StatelessWithBorder)
 
-
 const WithBorderHOC = Component => props => (
   <WithBorder color={props.color}>
     <Component {...props}/>
@@ -62,7 +61,7 @@ DynamicWithState.propTypes = {
 
 export class MainView extends Component {
   static propTypes = {
-    userData: PropTypes.array,
+    data: PropTypes.array,
     tags: PropTypes.array.isRequired,
     updateTags: PropTypes.func.isRequired,
     color: PropTypes.string,
@@ -74,13 +73,13 @@ export class MainView extends Component {
   }
 
   render() {
-    const {columns, color, userData} = this.props
+    const {columns, color, data} = this.props
     return (
       <div className="main-view">
         <div className="table-container">
           <TableWithBorder columns={columns}
                            color={color}
-                           data={userData}
+                           data={data}
                            defaultPageSize={5}/>
         </div>
         <div className="tags-container">

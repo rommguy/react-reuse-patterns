@@ -6,7 +6,7 @@ import TagsInput from 'react-tagsinput'
 
 export class MainView extends Component {
   static propTypes = {
-    userData: PropTypes.array,
+    data: PropTypes.array,
     tags: PropTypes.array.isRequired,
     updateTags: PropTypes.func.isRequired,
     color: PropTypes.string,
@@ -42,7 +42,7 @@ export class MainView extends Component {
                onMouseEnter={this.onMouseEnter}
                onMouseLeave={this.onMouseLeave}>
             <ReactTable
-              data={this.props.userData}
+              data={this.props.data}
               columns={this.props.columns}
               defaultPageSize={5}/>
           </div>
