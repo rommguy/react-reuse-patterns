@@ -38,7 +38,10 @@ const WithBorderHOC = Component => props => (
 const TableWithBorder = WithBorderHOC(ReactTable)
 
 class DynamicWithState extends Component {
-  static propTypes = {}
+  static propTypes = {
+    initialState: PropTypes.any,
+    children: PropTypes.func.is
+  }
 
   constructor(props) {
     super()
@@ -81,7 +84,7 @@ export class MainView extends Component {
                            defaultPageSize={5}/>
         </div>
         <div className="tags-container">
-          <DynamicWithState stateValue={null}>
+          <DynamicWithState initialState={null}>
             {(colorInState, updateBorderColor) => (
               <StatelessWithBorder color={color}
                                    updateBorderColor={updateBorderColor}
