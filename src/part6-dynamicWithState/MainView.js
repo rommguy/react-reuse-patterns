@@ -40,7 +40,7 @@ const TableWithBorder = WithBorderHOC(ReactTable)
 class DynamicWithState extends Component {
   static propTypes = {
     initialState: PropTypes.any,
-    children: PropTypes.func.is
+    children: PropTypes.func.isRequired
   }
 
   constructor(props) {

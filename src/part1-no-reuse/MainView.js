@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ReactTable from 'react-table';
 import {getRandomColorStyleValue} from '../utils'
 import TagsInput from 'react-tagsinput'
-import 'react-tagsinput/react-tagsinput.css'
 
 export class MainView extends Component {
   static propTypes = {
