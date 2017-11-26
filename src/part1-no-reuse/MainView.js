@@ -54,3 +54,47 @@ export class MainView extends Component {
     )
   }
 }
+
+
+const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComponent => class OuterComponent extends Component {
+  static propTypes = {}
+
+  constructor(props) {
+    super()
+
+    this.state = {myState: initialStateGetter(props)}
+  }
+
+  updateState = newVal => this.setState({myState: newVal})
+
+  render() {
+    const innerProps = {
+      [stateName]: this.state.myState,
+      [stateUpdaterName]: this.updateState
+    }
+    return (<InnerComponent {...innerProps} {...this.props}/>)
+  }
+}
+
+class DynamicWithState extends Component {
+  static propTypes = {
+    initialState: PropTypes.any,
+    children: PropTypes.func.isRequired
+  }
+
+  constructor(props) {
+    super()
+
+    this.state = {myState: props.initialState}
+  }
+
+  updateState = newValue => this.setState({myState: newValue})
+
+  render() {
+    return this.props.children(this.state.myState, this.updateState)
+  }
+}
+
+DynamicWithState.propTypes = {
+  initialState: PropTypes.any
+}
