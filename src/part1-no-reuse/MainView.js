@@ -13,11 +13,11 @@ export class MainView extends Component {
     columns: PropTypes.array
   }
 
-  constructor() {
+  constructor(props) {
     super()
 
     this.state = {
-      borderColor: null
+      borderColor: props.color
     }
   }
 
@@ -30,17 +30,15 @@ export class MainView extends Component {
   }
 
   onMouseLeave = () => {
-    this.setState({borderColor: null})
+    this.setState({borderColor: this.props.color})
   }
 
   render() {
-    const borderColor = this.state.borderColor || this.props.color
-
     return (
       <div className="main-view">
         <div className="table-container">
           <div className="with-border"
-               style={{borderColor}}
+               style={{borderColor: this.state.borderColor}}
                onMouseEnter={this.onMouseEnter}
                onMouseLeave={this.onMouseLeave}>
             <ReactTable
