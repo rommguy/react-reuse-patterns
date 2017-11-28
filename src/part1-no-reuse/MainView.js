@@ -56,7 +56,7 @@ export class MainView extends Component {
 }
 
 
-const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComponent => class OuterComponent extends Component {
+const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComp => class OuterComp extends Component {
   static propTypes = {}
 
   constructor(props) {
@@ -68,11 +68,11 @@ const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComp
   updateState = newVal => this.setState({myState: newVal})
 
   render() {
-    const innerProps = {
+    const innerCompProps = {
       [stateName]: this.state.myState,
       [stateUpdaterName]: this.updateState
     }
-    return (<InnerComponent {...innerProps} {...this.props}/>)
+    return (<InnerComp {...this.props} {...innerCompProps}/>)
   }
 }
 

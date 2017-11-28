@@ -1,7 +1,7 @@
 {
   "extends": "react-app",
   "rules": {
-    "react/prop-types": [2, {
+    "react/prop-types": [1, {
       "ignore": [
         "children"
       ]

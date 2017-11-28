@@ -59,7 +59,7 @@ export class MainView extends Component {
         <div className="table-container">
           <WithBorder color={this.props.color}>
             <ReactTable
-              data={this.props.userData}
+              data={this.props.data}
               columns={this.props.columns}
               defaultPageSize={5}/>
           </WithBorder>
