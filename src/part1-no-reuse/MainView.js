@@ -55,22 +55,25 @@ export class MainView extends Component {
   }
 }
 
+const withState = InnerComp => class OuterComp extends Component {
+  // simplified version of recompose withState
 
-const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComp => class OuterComp extends Component {
-  static propTypes = {}
+  static propTypes = {
+    initialStateValue: PropTypes.any
+  }
 
   constructor(props) {
     super()
 
-    this.state = {myState: initialStateGetter(props)}
+    this.state = {myState: props.initialStateValue}
   }
 
   updateState = newVal => this.setState({myState: newVal})
 
   render() {
     const innerCompProps = {
-      [stateName]: this.state.myState,
-      [stateUpdaterName]: this.updateState
+      stateValue: this.state.myState,
+      updateState: this.updateState
     }
     return (<InnerComp {...this.props} {...innerCompProps}/>)
   }
