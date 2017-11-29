@@ -10,8 +10,14 @@ React components used in the examples:
 * [react-tagsinput](https://github.com/olahol/react-tagsinput)
 
 
-The directories are divided according to the presentation phases.         
+The directories are divided according to the presentation phases, each contains a MainView component.                  
 To render the relevant part, switch the import of MainView in App.js        
+The parts are:
 
-* Part 1 - No reuse
-* Part 2 - Simple composition wrapper
+* No reuse
+* Simple composition
+* Repackaging with composition
+* Repackaging with HOC
+* HOC communication with inner component (withState example)
+* Render callback - Dynamic communication with inner component (withState example)
+
