@@ -4,29 +4,44 @@ import ReactTable from 'react-table';
 import {getRandomColorStyleValue} from '../utils'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
-import {withState} from 'recompose'
 
+const withState = InnerComponent => class OuterComponent extends Component {
+  static propTypes = {
+    color: PropTypes.any
+  }
 
-const StatelessWithBorder = props => {
-  const borderColor = props.colorInState || props.color
+  constructor(props) {
+    super()
 
-  return (
-    <div className="with-border"
-         style={{borderColor}}
-         onMouseEnter={() => props.updateBorderColor(getRandomColorStyleValue())}
-         onMouseLeave={() => props.updateBorderColor(null)}>
-      {props.children}
-    </div>
-  )
+    this.state = {myState: props.color}
+  }
+
+  updateState = newVal => this.setState({myState: newVal})
+
+  render() {
+    const innerProps = {
+      stateValue: this.state.myState,
+      updateState: this.updateState
+    }
+    return (<InnerComponent {...innerProps} {...this.props}/>)
+  }
 }
+
+const StatelessWithBorder = props => (
+  <div className="with-border"
+       style={{borderColor: props.stateValue}}
+       onMouseEnter={() => props.updateState(getRandomColorStyleValue())}
+       onMouseLeave={() => props.updateState(props.color)}>
+    {props.children}
+  </div>
+)
 
 StatelessWithBorder.propTypes = {
-  color: PropTypes.string,
-  colorInState: PropTypes.string,
-  updateBorderColor: PropTypes.func
+  stateValue: PropTypes.string,
+  updateState: PropTypes.func,
+  color: PropTypes.string
 }
-
-const WithBorder = withState('colorInState', 'updateBorderColor', null)(StatelessWithBorder)
+const WithBorder = withState(StatelessWithBorder)
 
 const WithBorderHOC = Component => props => (
   <WithBorder color={props.color}>
@@ -83,11 +98,11 @@ export class MainView extends Component {
                            defaultPageSize={5}/>
         </div>
         <div className="tags-container">
-          <DynamicWithState initialState={null}>
+          <DynamicWithState color={color}>
             {(colorInState, updateBorderColor) => (
               <StatelessWithBorder color={color}
-                                   updateBorderColor={updateBorderColor}
-                                   colorInState={colorInState}>
+                                   updateState={updateBorderColor}
+                                   stateValue={colorInState}>
                 <TagsInput value={this.props.tags}
                            onChange={this.updateTags}/>
               </StatelessWithBorder>

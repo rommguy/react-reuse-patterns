@@ -5,46 +5,44 @@ import {getRandomColorStyleValue} from '../utils'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 
-const withState = (stateName, stateUpdaterName, initialStateGetter) => InnerComponent => class OuterComponent extends Component {
-  static propTypes = {}
+const withState = InnerComponent => class OuterComponent extends Component {
+  static propTypes = {
+    color: PropTypes.any
+  }
 
   constructor(props) {
     super()
 
-    this.state = {myState: initialStateGetter(props)}
+    this.state = {myState: props.color}
   }
 
   updateState = newVal => this.setState({myState: newVal})
 
   render() {
     const innerProps = {
-      [stateName]: this.state.myState,
-      [stateUpdaterName]: this.updateState
+      stateValue: this.state.myState,
+      updateState: this.updateState
     }
     return (<InnerComponent {...innerProps} {...this.props}/>)
   }
 }
 
-const StatelessWithBorder = props => {
-  const borderColor = props.colorInState || props.color
-
-  return (
-    <div className="with-border"
-         style={{borderColor}}
-         onMouseEnter={() => props.updateBorderColor(getRandomColorStyleValue())}
-         onMouseLeave={() => props.updateBorderColor(null)}>
-      {props.children}
-    </div>
-  )
-}
+const StatelessWithBorder = props => (
+  <div className="with-border"
+       style={{borderColor: props.stateValue}}
+       onMouseEnter={() => props.updateState(getRandomColorStyleValue())}
+       onMouseLeave={() => props.updateState(props.color)}>
+    {props.children}
+  </div>
+)
 
 StatelessWithBorder.propTypes = {
-  color: PropTypes.string,
-  colorInState: PropTypes.string,
-  updateBorderColor: PropTypes.func
+  stateValue: PropTypes.string,
+  updateState: PropTypes.func,
+  color: PropTypes.string
 }
 
-const WithBorder = withState('colorInState', 'updateBorderColor', null)(StatelessWithBorder)
+const WithBorder = withState(StatelessWithBorder)
 
 
 const WithBorderHOC = Component => props => (

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {MainView} from './part1-no-reuse/MainView'
-//import {MainView} from './part2-simple-composition/MainView'
-//import {MainView} from './part3-simple-export/MainView'
-//import {MainView} from './part5-hoc-withState/MainView'
+// import {MainView} from './part2-simple-composition/MainView'
+// import {MainView} from './part3-simple-export/MainView'
+// import {MainView} from './part5-hoc-withState/MainView'
 // import {MainView} from './part6-dynamicWithState/MainView'
 import {withState} from 'recompose'
 import 'react-table/react-table.css'

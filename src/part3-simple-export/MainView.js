@@ -10,11 +10,11 @@ class WithBorder extends Component {
     color: PropTypes.string
   }
 
-  constructor() {
+  constructor(props) {
     super()
 
     this.state = {
-      borderColor: null
+      borderColor: props.color
     }
   }
 
@@ -23,15 +23,13 @@ class WithBorder extends Component {
   }
 
   onMouseLeave = () => {
-    this.setState({borderColor: null})
+    this.setState({borderColor: this.props.color})
   }
 
   render() {
-    const borderColor = this.state.borderColor || this.props.color
-
     return (
       <div className="with-border"
-           style={{borderColor}}
+           style={{borderColor: this.state.borderColor}}
            onMouseEnter={this.onMouseEnter}
            onMouseLeave={this.onMouseLeave}>
         {this.props.children}
@@ -42,25 +40,30 @@ class WithBorder extends Component {
 
 const TableWithBorder = props => (
   <WithBorder color={props.color}>
-    <ReactTable {...props}/>
+    <ReactTable columns={props.columns}
+                data={props.data}
+                defaultPageSize={props.defaultPageSize}/>
   </WithBorder>
 )
 
 TableWithBorder.propTypes = {
   color: PropTypes.string,
-  userData: PropTypes.array,
+  data: PropTypes.array,
   columns: PropTypes.array,
   defaultPageSize: PropTypes.number
 }
 
 const TagsWithBorder = props => (
   <WithBorder color={props.color}>
-    <TagsInput {...props}/>
+    <TagsInput value={props.value}
+               onChange={props.onChange}/>
   </WithBorder>
 )
 
 TagsWithBorder.propTypes = {
-  color: PropTypes.string
+  color: PropTypes.string,
+  value: PropTypes.array,
+  onChange: PropTypes.func
 }
 
 export class MainView extends Component {
@@ -81,8 +84,8 @@ export class MainView extends Component {
     return (
       <div className="main-view">
         <div className="table-container">
-          <TableWithBorder columns={columns}
-                           color={color}
+          <TableWithBorder color={color}
+                           columns={columns}
                            data={data}
                            defaultPageSize={5}/>
         </div>
