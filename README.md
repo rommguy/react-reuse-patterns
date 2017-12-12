@@ -3,7 +3,7 @@
 This repository contains examples used for Wix Engineering meetup       
 [Link to meetup](https://www.meetup.com/at-wix/events/244861816/)       
 [Link to slides](https://docs.google.com/presentation/d/1jxHhiZELbMh1YvvXhB1YIaovyUbsc8abTy54PriLh4o/edit?usp=sharing)       
-
+[Video in Youtube](https://www.youtube.com/watch?v=0BNgi9vofaw&t=1393s)
 
 The app was created using [create-react-app](https://github.com/facebookincubator/create-react-app)          
 React components used in the examples:           
